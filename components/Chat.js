@@ -85,7 +85,7 @@ const Chat = () => {
 
   const fetchOpenAIResponse = async (prompt) => {
     const API_KEY = "sk-proj-2JfK80yqgh5QFhCcl2VkT3BlbkFJVunoZsK88j8898wWXSeO";
-
+    const sonicContext = 'Your name is just sonica, you are just our support chat bot for our sonic blockchain network'
     try {
       const response = await fetch(
         "https://api.openai.com/v1/chat/completions",
@@ -97,7 +97,11 @@ const Chat = () => {
           },
           body: JSON.stringify({
             model: "gpt-4-turbo",
-            messages: [{ role: "user", content: prompt }],
+            messages: [  
+              { role: "system", content: sonicContext },  
+              { role: "user", content: prompt }  
+          ],  
+          stream: false,  
             stream: true,
           }),
         }
