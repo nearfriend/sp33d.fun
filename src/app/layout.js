@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
       <header>
         <link
           rel="stylesheet"
-          href="https://sp33d-fun.vercel.app/globals.css" // Example CDN link
+          href="/globals.css" // Example CDN link
           crossOrigin="anonymous"
         />
       </header>
