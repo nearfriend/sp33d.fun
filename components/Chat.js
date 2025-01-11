@@ -60,7 +60,7 @@ const preStyle = {
   padding: "10px",
   overflowX: "auto",
   color: "black",
-  height: "88%",
+  height: "100%",
 };
 
 const Chat = () => {
