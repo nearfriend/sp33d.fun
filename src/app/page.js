@@ -1,0 +1,32 @@
+"use client";
+
+import React, { useState } from "react";
+import Header from "../../components/Header";
+import CreateToken from "../../components/CreateToken";
+import Leaderboard from "../../components/Leaderboard";
+import BuySell from "../../components/BuySell";
+import Presale from "../../components/Presale";
+import Chat from "../../components/Chat";
+
+const Home = () => {
+  const [activeTab, setActiveTab] = useState("create");
+
+  return (
+    <div style={{ height: "100vh" }}>
+      <Header setActiveTab={setActiveTab} />
+      <div style={{ height: "88%" }}>
+        {activeTab === "create" ? (
+          <CreateToken setActiveTab={setActiveTab} />
+        ) : activeTab === "leaderboard" ? (
+          <Leaderboard />
+        ) : activeTab === "presale" ? (
+          <Presale />
+        ) : (
+          <Chat />
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Home;
