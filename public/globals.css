@@ -72,7 +72,7 @@ a {
   display: flex;
   justify-content: center;
   background: #ffffff;
-  padding: 0px 20px;
+  padding: 10px;
   align-items: center;
 
   column-gap: 10px;

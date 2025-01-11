@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <div style={{ height: "100vh" }}>
       <Header setActiveTab={setActiveTab} />
-      <div style={{ height: "88%" }}>
+      <div style={{ height: "85%" }}>
         {activeTab === "create" ? (
           <CreateToken setActiveTab={setActiveTab} />
         ) : activeTab === "leaderboard" ? (

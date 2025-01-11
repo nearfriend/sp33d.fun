@@ -11,7 +11,6 @@ const HeaderContainer = styled.header`
   font-family: "Sonic", sans-serif;
   position: relative;
   z-index: 999;
-  height:12%;
 `;
 
 const TabButton = styled.button`
