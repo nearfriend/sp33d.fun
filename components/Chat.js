@@ -85,7 +85,7 @@ const Chat = () => {
 
   const fetchOpenAIResponse = async (prompt) => {
     const API_KEY = "sk-proj-2JfK80yqgh5QFhCcl2VkT3BlbkFJVunoZsK88j8898wWXSeO";
-    const sonicContext = 'Your name is just sonica, you are just our support chat bot for our sonic blockchain network'
+    const sonicContext = 'Your name is just sonica, you are just our support chat bot for our sonic blockchain network, and please use this link (https://x.com/SonicLabs) when user ask you about sonic'
     try {
       const response = await fetch(
         "https://api.openai.com/v1/chat/completions",
