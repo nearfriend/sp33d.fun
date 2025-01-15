@@ -95,7 +95,7 @@ const BuySell = () => {
   const [selected, setSelected] = useState(false);
 
   return (
-    <div className="inner-token-container">
+    <div className={isMobile ? "inner-token-containerM" : 'inner-token-container'}>
       <CreateTokenContainer>
         <h1>boom</h1>
         <h1>💥</h1>

@@ -5,20 +5,19 @@ import FloatingSupportButton from "./FloatingButton";
 import { usePoolContract, useRouterContract } from "../hooks/useContracts";
 import BigNumber from "bignumber.js";
 import { Contracts } from "../src/lib/config.js";
+import { isMobile } from "react-device-detect";
 
 const LeaderboardContainer = styled.div`
   text-align: center;
   width: 52%;
   margin: 0 auto;
   background: white;
-  padding: 30px;
-  // margin-top: 10em;
+  padding: 65px 30px 30px 30px !important;
   position: relative;
   z-index: 999;
 
   @media (max-width: 768px) {
-    width: 98%;
-    padding: 20px;
+    width: 99%;
   }
 `;
 
@@ -80,9 +79,9 @@ const IconLink = styled.a`
   }
 `;
 
-const CreateButton = styled.button`
-  padding: 5px 25px;
-  font-size: 16px;
+const CreateButton = isMobile ? styled.button`
+  padding: 5px 10px;
+  font-size: 12px;
   background-color: #414fff;
   border: none;
   cursor: pointer;
@@ -91,10 +90,26 @@ const CreateButton = styled.button`
   justify-content: center;
   column-gap: 5px;
   color: white;
+  border-radius:5px;
 
   &:hover {
     background: black;
   }
+`: styled.button`
+padding: 5px 25px;
+font-size: 16px;
+background-color: #414fff;
+border: none;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+column-gap: 5px;
+color: white;
+
+&:hover {
+  background: black;
+}
 `;
 const Leaderboard = () => {
   const poolContract = usePoolContract();
@@ -199,9 +214,15 @@ const Leaderboard = () => {
             justifyContent: "space-between",
           }}
         >
-          <h1 className="h1-leader">
-            <FaTrophy /> Leaderboard
-          </h1>
+          {
+            isMobile ?
+              <h3 className="h1-leader">
+                <FaTrophy /> Leaderboard
+              </h3> :
+              <h1 className="h1-leader">
+                <FaTrophy /> Leaderboard
+              </h1>
+          }
           <CreateButton
             onClick={() => {
               SortByMarketCap();
@@ -210,13 +231,13 @@ const Leaderboard = () => {
             {sort ? "Low to High" : "High to Low"}
           </CreateButton>
         </div>
-        <div style={{ height: "70vh", overflowY: "overlay",marginTop:'30px' }}>
+        <div style={{ height: "70vh", overflowY: "overlay", marginTop: isMobile ? '10px' : '30px' }}>
           {list.length > 0 ? (
             <TokenTable>
               <thead>
                 <tr>
                   <TableHeader>Rank</TableHeader>
-                  <TableHeader>Image & Name</TableHeader>
+                  <TableHeader style={{ minWidth: '180px' }}>Image & Name</TableHeader>
                   <TableHeader>Symbol</TableHeader>
                   <TableHeader>Supply</TableHeader>
                   <TableHeader>Market Cap</TableHeader>

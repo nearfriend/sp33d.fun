@@ -10,6 +10,7 @@ import { useAccount } from "wagmi";
 import { usePoolContract } from "../hooks/useContracts";
 import BigNumber from "bignumber.js";
 import useWeb3 from "../hooks/useWeb3";
+import { isMobile } from "react-device-detect";
 
 export const apikey = "23eb84f8dfb91dd81628";
 export const apisecret =
@@ -18,18 +19,27 @@ export const apisecret =
 const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
 const jsonUrl = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
 
-const CreateTokenContainer = styled.div`
+const CreateTokenContainer = isMobile ? styled.div`
   text-align: center;
-  padding: 20px;
+  padding: 0px 10px;
   display: flex;
   flex-direction: column;
   background: #ffffff;
-  padding: 2.5em;
   row-gap: 11px;
-  min-width: 400px;
   position: relative;
   z-index: 999;
-`;
+`: styled.div`
+text-align: center;
+padding: 20px;
+display: flex;
+flex-direction: column;
+background: #ffffff;
+padding: 2.5em;
+row-gap: 11px;
+min-width: 400px;
+position: relative;
+z-index: 999;
+`
 
 const InputField = styled.input`
   padding: 20px;
@@ -156,8 +166,8 @@ const CreateToken = ({ setActiveTab }) => {
     }
   };
 
-  const uploadJsonInfo = async(img)=>{
-    console.log(img,twitterLink,websiteLink)
+  const uploadJsonInfo = async (img) => {
+    console.log(img, twitterLink, websiteLink)
     const response = await axios.post(jsonUrl, {
       img,
       twitterLink,
@@ -181,7 +191,7 @@ const CreateToken = ({ setActiveTab }) => {
         console.log("image cid", cid);
 
         const jsonCid = await uploadJsonInfo(cid);
-        console.log('jsonCid',jsonCid)
+        console.log('jsonCid', jsonCid)
 
         setLoading("launch");
 
@@ -226,7 +236,7 @@ const CreateToken = ({ setActiveTab }) => {
   };
 
   return (
-    <div className="inner-token-container">
+    <div className={isMobile ? "inner-token-containerM" : 'inner-token-container'}>
       <Toaster />
       <CreateTokenContainer>
         <h1 className="h1-create">Create a Sonic Memecoin</h1>

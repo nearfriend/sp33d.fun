@@ -3,21 +3,34 @@ import styled from "styled-components";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
+import { isMobile } from "react-device-detect";
 
-const CreateTokenContainer = styled.div`
+const CreateTokenContainer = isMobile ? styled.div`
   text-align: left;
-  padding: 20px;
+  width:100%;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   background: #ffffff;
-  padding: 2.5em;
   row-gap: 11px;
-  min-width: 640px;
-  max-width: 640px;
   position: relative;
   z-index: 999;
   border-radius: 6px;
   height: 100%;
+`: styled.div`
+text-align: left;
+padding: 20px;
+display: flex;
+flex-direction: column;
+background: #ffffff;
+padding: 2.5em;
+row-gap: 11px;
+min-width: 640px;
+max-width: 640px;
+position: relative;
+z-index: 999;
+border-radius: 6px;
+height: 100%;
 `;
 
 const InputField = styled.textarea`
@@ -84,7 +97,7 @@ const Chat = () => {
   };
 
   const fetchOpenAIResponse = async (prompt) => {
-    const API_KEY = "sk-proj-2JfK80yqgh5QFhCcl2VkT3BlbkFJVunoZsK88j8898wWXSeO";
+    const API_KEY = "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";
     const content = [
       `Sonic is an EVM L1 chain with powerful incentives and infrastructure for DeFi.`,
       `Fantom’s Rebranded Blockchain Sonic Labs Launches Testnet`,
@@ -191,44 +204,9 @@ To bridge assets between Ethereum and Sonic network via the Sonic Gateway;
   }, [history]);
 
   return (
-    <div className="inner-token-container">
+    <div className={isMobile ? "inner-token-containerM" : 'inner-token-container'}>
       <Toaster position="right-bottom" />
       <CreateTokenContainer>
-        {/* <div
-          style={{
-            borderRadius: "6px",
-            flex: "1",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            overflowY: "overlay",
-            }}
-            ref={containerRef}
-            >
-            {history.length > 0 &&
-            history.map((item, key) => {
-              return (
-                <div
-                key={key}
-                style={{
-                  display: "flex",
-                  justifyContent: key % 2 === 1 ? "start" : "end",
-                  }}
-                  >
-                  <h5
-                  style={{
-                    maxWidth: "40%",
-                    textAlign: "left",
-                    color: "black",
-                    wordWrap: "break-word",
-                    }}
-                    >
-                    {item}
-                    </h5>
-                </div>
-                );
-            })}
-            </div> */}
         <div style={preStyle}>
           <pre style={{ whiteSpace: "pre-wrap" }}>{responseText}</pre>
         </div>

@@ -2,19 +2,31 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import toast, { Toaster } from "react-hot-toast";
+import { isMobile } from "react-device-detect";
 
-const CreateTokenContainer = styled.div`
+const CreateTokenContainer = isMobile ? styled.div`
   text-align: left;
-  padding: 20px;
+  padding: 0px 10px;
   border-radius: 6px;
   display: flex;
   flex-direction: column;
   background: #ffffff;
-  padding: 2.5em;
   row-gap: 11px;
-  min-width: 640px;
   position: relative;
   z-index: 999;
+  width:100vw;
+`: styled.div`
+text-align: left;
+padding: 10px 20px;
+border-radius: 6px;
+display: flex;
+flex-direction: column;
+background: #ffffff;
+padding: 2.5em;
+row-gap: 11px;
+min-width: 640px;
+position: relative;
+z-index: 999;
 `;
 
 const InputField = styled.input`
@@ -64,14 +76,14 @@ const Presale = () => {
     setFTMPrice(Price);
   }
 
-  useEffect(() => {}, [coinamount, tokenAmount]);
+  useEffect(() => { }, [coinamount, tokenAmount]);
 
   useEffect(() => {
     getFTMPrice();
   }, []);
 
   return (
-    <div className="inner-token-container">
+    <div className={isMobile ? "inner-token-containerM" : 'inner-token-container'}>
       <Toaster position="top-right" />
       <CreateTokenContainer>
         <div className="buysell-button">
@@ -154,7 +166,7 @@ const Presale = () => {
             alt="QR Code"
           />
         </div>
-        <h4 style={{ textAlign: "center", color: "black" }}>
+        {isMobile ? <h6 style={{ textAlign: "center", color: "black" }}>
           Send {selected ? "Fantom" : "Sonic"} to <br />{" "}
           {selected
             ? "0xE95653B23DF1eE3948935F6D0b06bc6EF5A29500"
@@ -179,8 +191,33 @@ const Presale = () => {
               Copy
             </span>
           </CopyToClipboard>
-        </h4>
-        <div style={{ display: "flex", gap: "10px" }}>
+        </h6> : <h4 style={{ textAlign: "center", color: "black" }}>
+          Send {selected ? "Fantom" : "Sonic"} to <br />{" "}
+          {selected
+            ? "0xE95653B23DF1eE3948935F6D0b06bc6EF5A29500"
+            : "0xE95653B23DF1eE3948935F6D0b06bc6EF5A29500"}
+          <CopyToClipboard
+            text={
+              selected
+                ? "0xE95653B23DF1eE3948935F6D0b06bc6EF5A29500"
+                : "0xE95653B23DF1eE3948935F6D0b06bc6EF5A29500"
+            }
+            onCopy={() => {
+              toast.success("Address Copied!");
+            }}
+          >
+            <span
+              style={{
+                marginLeft: "10px",
+                cursor: "pointer",
+                color: "#414fff",
+              }}
+            >
+              Copy
+            </span>
+          </CopyToClipboard>
+        </h4>}
+        {isMobile ? <div style={{ display: "grid", gap: "10px" }}>
           <div
             style={{
               position: "relative",
@@ -252,7 +289,80 @@ const Presale = () => {
               }}
             />
           </div>
-        </div>
+        </div> : <div style={{ display: "flex", gap: "10px" }}>
+          <div
+            style={{
+              position: "relative",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            {selected ? (
+              <img
+                src="./fantom-dark.png"
+                alt="sonic"
+                style={{
+                  width: "30px",
+                  marginLeft: "10px",
+                  position: "absolute",
+                  height: "30px",
+                }}
+              />
+            ) : (
+              <img
+                src="./sonic-dark.svg"
+                alt="sonic"
+                style={{
+                  width: "30px",
+                  marginLeft: "10px",
+                  position: "absolute",
+                  height: "30px",
+                }}
+              />
+            )}
+            <InputField
+              type="text"
+              placeholder="00000"
+              value={coinamount}
+              onChange={(e) => {
+                setTokenAmount(
+                  Number(e.target.value * (ftmprice / 0.001)).toFixed(5)
+                );
+                setCoinamount(e.target.value);
+              }}
+            />
+          </div>
+          <div
+            style={{
+              position: "relative",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <img
+              src="./sp33dlogo.png"
+              alt="sonic"
+              style={{
+                width: "30px",
+                marginLeft: "10px",
+                position: "absolute",
+                height: "30px",
+              }}
+            />
+            <InputField
+              type="text"
+              placeholder="00000 $SP33D"
+              value={tokenAmount}
+              onChange={(e) => {
+                setCoinamount(
+                  Number(e.target.value * (0.001 / ftmprice)).toFixed(5)
+                );
+                setTokenAmount(e.target.value);
+              }}
+            />
+          </div>
+        </div>}
+
         <div
           style={{
             textAlign: "center",

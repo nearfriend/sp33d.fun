@@ -14,7 +14,7 @@
 
 
 :root {
-  --background: #ffffff;
+  --background: #eae2fa;
   --foreground: #171717;
 }
 
@@ -102,6 +102,15 @@ a {
   align-items: center;
   flex-direction: column;
   padding-bottom: 30px;
+}
+
+.inner-token-containerM {
+  padding-top: 65px;
+  height: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
 }
 
 .h1-create {
