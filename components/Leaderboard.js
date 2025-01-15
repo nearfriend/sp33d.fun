@@ -7,7 +7,7 @@ import BigNumber from "bignumber.js";
 import { Contracts } from "../src/lib/config.js";
 import { isMobile } from "react-device-detect";
 
-const LeaderboardContainer = styled.div`
+const LeaderboardContainer = isMobile ? styled.div`
   text-align: center;
   width: 52%;
   margin: 0 auto;
@@ -19,6 +19,18 @@ const LeaderboardContainer = styled.div`
   @media (max-width: 768px) {
     width: 99%;
   }
+`: styled.div`
+text-align: center;
+width: 52%;
+margin: 0 auto;
+background: white;
+padding: 30px !important;
+position: relative;
+z-index: 999;
+
+@media (max-width: 768px) {
+  width: 99%;
+}
 `;
 
 const TokenTable = styled.table`
