@@ -19,7 +19,7 @@
     "babel-plugin-styled-components": "^2.1.4",
     "bignumber.js": "^9.1.2",
     "electron": "^33.2.1",
-    "next": "15.1.2",
+    "next": "15.1.11",
     "openai": "^4.78.0",
     "pinata": "^1.10.1",
     "react": "^18.3.1",
